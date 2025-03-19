@@ -16,7 +16,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kotlinpractice.R
-import com.example.kotlinpractice.adapers.SongAdapter
+import com.example.kotlinpractice.adapters.SongAdapter
 import com.example.kotlinpractice.databinding.FragmentPlaylistContentBinding
 import com.example.kotlinpractice.db.AppDatabase
 import com.example.kotlinpractice.db.viewmodel.PlaylistContentViewModel

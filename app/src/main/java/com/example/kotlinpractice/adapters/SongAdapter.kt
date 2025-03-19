@@ -1,4 +1,4 @@
-package com.example.kotlinpractice.adapers
+package com.example.kotlinpractice.adapters
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater

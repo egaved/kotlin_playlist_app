@@ -12,7 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kotlinpractice.R
-import com.example.kotlinpractice.adapers.PlaylistAdapter
+import com.example.kotlinpractice.adapters.PlaylistAdapter
 import com.example.kotlinpractice.databinding.FragmentPlaylistListBinding
 import com.example.kotlinpractice.db.AppDatabase
 import com.example.kotlinpractice.db.viewmodel.PlaylistViewModel
