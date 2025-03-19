@@ -21,6 +21,7 @@ import com.example.kotlinpractice.databinding.FragmentPlaylistContentBinding
 import com.example.kotlinpractice.db.AppDatabase
 import com.example.kotlinpractice.db.viewmodel.PlaylistContentViewModel
 import com.example.kotlinpractice.db.viewmodel.PlaylistContentViewModelFactory
+import com.example.kotlinpractice.domain.Song
 import kotlinx.coroutines.launch
 
 class PlaylistContentFragment : Fragment() {
@@ -46,6 +47,7 @@ class PlaylistContentFragment : Fragment() {
 
         val viewModelFactory =
             PlaylistContentViewModelFactory(playlistDao, songDao, playlistId, application)
+
         viewModel = ViewModelProvider(this, viewModelFactory)
             .get(PlaylistContentViewModel::class.java)
 
@@ -55,19 +57,15 @@ class PlaylistContentFragment : Fragment() {
             }
         }
 
-
-        // Наблюдение за отфильтрованными песнями
         viewModel.filteredSongs.observe(viewLifecycleOwner) { filteredSongs ->
             adapter.updateSongs(filteredSongs)
         }
 
-        // Обработка нажатия на кнопку фильтрации
         binding.filterButton.setOnClickListener {
             toggleFilterVisibility()
             updateRecyclerViewConstraints()
         }
 
-        // Обработка ввода в поля фильтрации
         binding.artistFilterEditText.addTextChangedListener {
             viewModel.setArtistFilter(it.toString())
         }
@@ -86,6 +84,7 @@ class PlaylistContentFragment : Fragment() {
 
         viewModel.getSongsForPlaylist().observe(viewLifecycleOwner) { songs ->
             adapter.updatePlaylists(songs)
+            binding.totalDuration.text = viewModel.getTotalDuration(songs)
         }
 
         binding.fabAddSong.setOnClickListener {
@@ -97,13 +96,11 @@ class PlaylistContentFragment : Fragment() {
             updateRecyclerViewConstraints()
         }
 
-        // Обработка нажатия на кнопку сохранения
         binding.saveButton.setOnClickListener {
             saveChanges()
             updateRecyclerViewConstraints()
         }
 
-        // Обработка нажатия на кнопку отмены
         binding.cancelButton.setOnClickListener {
             exitEditMode()
             updateRecyclerViewConstraints()
@@ -127,7 +124,6 @@ class PlaylistContentFragment : Fragment() {
         }
     }
 
-    // Сохранение изменений
     private fun saveChanges() {
         val newName = binding.editPlaylistNameEditText.text.toString().trim()
         if (newName.isNotEmpty()) {
@@ -140,13 +136,11 @@ class PlaylistContentFragment : Fragment() {
         }
     }
 
-    // Выход из режима редактирования
     private fun exitEditMode() {
         binding.headerLayout.visibility = View.VISIBLE
         binding.editModeLayout.visibility = View.GONE
     }
 
-     //Переключение видимости фильтров
     private fun toggleFilterVisibility() {
         if (binding.filterLayout.visibility == View.VISIBLE) {
             binding.filterLayout.visibility = View.GONE
@@ -154,20 +148,6 @@ class PlaylistContentFragment : Fragment() {
             binding.filterLayout.visibility = View.VISIBLE
         }
     }
-
-    // Применение фильтров
-//    private fun applyFilters(artistFilter: String, genreFilter: String) {
-//        viewModel.getSongsForPlaylist().value?.let { songs ->
-//            val filteredSongs = songs.filter { song ->
-//                (artistFilter.isEmpty() || song.artist.contains(artistFilter, ignoreCase = true)) &&
-//                        (genreFilter.isEmpty() || song.genre.contains(
-//                            genreFilter,
-//                            ignoreCase = true
-//                        ))
-//            }
-//            adapter.updateSongs(filteredSongs)
-//        }
-//    }
 
     private fun updateRecyclerViewConstraints() {
         val constraintSet = ConstraintSet()

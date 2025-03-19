@@ -20,7 +20,6 @@ import com.example.kotlinpractice.db.viewmodel.PlaylistViewModelFactory
 
 import kotlinx.coroutines.launch
 
-
 class PlaylistListFragment : Fragment() {
 
     private lateinit var viewModel: PlaylistViewModel
@@ -38,7 +37,7 @@ class PlaylistListFragment : Fragment() {
         viewModel = ViewModelProvider(this, playlistViewModelFactory)
             .get(PlaylistViewModel::class.java)
 
-        // Наблюдение за отфильтрованными плейлистами
+        // наблюдение за отфильтрованными плейлистами
         viewModel.filteredPlaylists.observe(viewLifecycleOwner) { playlists ->
             adapter.updatePlaylists(playlists)
         }
@@ -72,7 +71,4 @@ class PlaylistListFragment : Fragment() {
             .actionPlaylistListFragmentToPlaylistContentFragment(playlistId)
         findNavController().navigate(action)
     }
-
-
-
 }

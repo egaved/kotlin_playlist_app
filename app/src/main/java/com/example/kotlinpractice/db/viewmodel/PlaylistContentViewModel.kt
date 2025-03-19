@@ -10,6 +10,7 @@ import com.example.kotlinpractice.db.dao.PlaylistDao
 import com.example.kotlinpractice.db.dao.SongDao
 import com.example.kotlinpractice.domain.Playlist
 import com.example.kotlinpractice.domain.Song
+import com.example.kotlinpractice.utils.toTimeString
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -25,7 +26,6 @@ class PlaylistContentViewModel(
     private val _artistFilter = MutableLiveData<String>()
     private val _genreFilter = MutableLiveData<String>()
 
-    // LiveData для отфильтрованных песен
     val filteredSongs = MediatorLiveData<List<Song>>().apply {
         addSource(_songsForPlaylist) { songs ->
             filterAndSetData(songs, _artistFilter.value, _genreFilter.value)
@@ -42,6 +42,14 @@ class PlaylistContentViewModel(
         withContext(Dispatchers.IO) {
             playlistDao.updateName(playlistId, newName)
         }
+    }
+
+    fun getTotalDuration(songs: List<Song>): String {
+        var totalDurationInSeconds = 0
+        for (song in songs) {
+            totalDurationInSeconds += song.duration
+        }
+        return totalDurationInSeconds.toTimeString()
     }
 
     fun getPlaylist(): LiveData<Playlist?> {
