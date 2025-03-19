@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".fragments.PlaylistContentFragment">
+
+        <!-- Заголовок с кнопкой редактирования -->
+        <LinearLayout
+            android:id="@+id/headerLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:padding="16dp">
+
+            <!-- Название плейлиста -->
+            <TextView
+                android:id="@+id/playlistTitleTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_weight="1"
+                tools:text="My Playlist" />
+
+            <ImageButton
+                android:id="@+id/filterButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_filter"
+                android:layout_marginStart="8dp" />
+
+            <!-- Кнопка редактирования -->
+            <ImageButton
+                android:id="@+id/editButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_edit"
+                android:padding="8dp" />
+        </LinearLayout>
+
+        <!-- Режим редактирования -->
+        <LinearLayout
+            android:id="@+id/editModeLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:visibility="gone"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/song_list"
+            android:padding="16dp">
+
+            <!-- Поле для ввода нового названия -->
+            <EditText
+                android:id="@+id/editPlaylistNameEditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="Введите новое название"
+                android:layout_weight="1"
+                android:inputType="text" />
+
+            <!-- Кнопка сохранения -->
+            <ImageButton
+                android:id="@+id/saveButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_accept"
+                android:layout_marginStart="8dp" />
+
+            <!-- Кнопка отмены -->
+            <ImageButton
+                android:id="@+id/cancelButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_decline"
+                android:layout_marginStart="8dp" />
+        </LinearLayout>
+
+        <!-- Фильтры (скрыты по умолчанию) -->
+        <LinearLayout
+            android:id="@+id/filterLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/headerLayout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/song_list"
+            android:padding="16dp">
+
+            <!-- Поле для фильтрации по исполнителям -->
+            <EditText
+                android:id="@+id/artistFilterEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Исполнитель"
+                android:inputType="text"
+                android:layout_marginBottom="8dp" />
+
+            <!-- Поле для фильтрации по жанрам -->
+            <EditText
+                android:id="@+id/genreFilterEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Жанр"
+                android:inputType="text" />
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/song_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintTop_toBottomOf="@id/headerLayout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_margin="15dp" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabAddSong"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="add song"
+            app:srcCompat="@drawable/ic_add"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_margin="10dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
+

@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Kotlin Practice</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="filter_options">
+        <item>Все</item>
+        <item>По жанру</item>
+        <item>По исполнителю</item>
+    </string-array>
+
+    <string name="filter_prompt">Выберите фильтр</string>
+</resources>

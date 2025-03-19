@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation.xml"
+    app:startDestination="@id/playlistListFragment">
+    <fragment
+        android:id="@+id/playlistListFragment"
+        android:name="com.example.kotlinpractice.fragments.PlaylistListFragment"
+        android:label="fragment_playlist_list"
+        tools:layout="@layout/fragment_playlist_list" >
+        <argument
+            android:name="playlistId"
+            app:argType="long" />
+        <action
+            android:id="@+id/action_playlistListFragment_to_playlistContentFragment"
+            app:destination="@id/playlistContentFragment">
+            <argument
+                android:name="playlistId"
+                app:argType="long" />
+        </action>
+        <action
+            android:id="@+id/action_playlistListFragment_to_addPlaylistFragment"
+            app:destination="@id/addPlaylistFragment"
+            app:popUpTo="@id/playlistListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addPlaylistFragment"
+        android:name="com.example.kotlinpractice.fragments.AddPlaylistFragment"
+        android:label="fragment_add_playlist"
+        tools:layout="@layout/fragment_add_playlist" />
+    <fragment
+        android:id="@+id/addSongFragment"
+        android:name="com.example.kotlinpractice.fragments.AddSongFragment"
+        android:label="fragment_add_song"
+        tools:layout="@layout/fragment_add_song" />
+    <fragment
+        android:id="@+id/playlistContentFragment"
+        android:name="com.example.kotlinpractice.fragments.PlaylistContentFragment"
+        android:label="fragment_playlist_content"
+        tools:layout="@layout/fragment_playlist_content" >
+        <argument
+            android:name="playlistId"
+            app:argType="long" />
+        <action
+            android:id="@+id/action_playlistContentFragment_to_addSongFragment"
+            app:destination="@id/addSongFragment">
+            <argument
+                android:name="playlistId"
+                app:argType="long" />
+        </action>
+    </fragment>
+</navigation>
